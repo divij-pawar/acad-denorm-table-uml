@@ -1,0 +1,10 @@
+*
+*.xlsx
+*.csv
+*.accdb
+*.laccdb
+/env
+!*.py
+!*.md
+!.gitignore
+!requirements.txt
