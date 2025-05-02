@@ -14,6 +14,7 @@ hood_colors_df = pd.read_excel("Hood Colors.xlsx")
 
 # Perform LEFT JOINs 
 merged_df = all_grad_students.merge(academic_plans_df,left_on='PLAN',right_on='Academic Plan',how='left',suffixes=('', '_academic_plans'))
+merged_df = merged_df.drop(columns=["DISSERTATION"])
 merged_df = merged_df.merge(academic_subplans_df,left_on=['PLAN', 'SUB PLAN'],right_on=['ACAD_PLAN', 'ACAD_SUB_PLAN'],how='left',suffixes=('', '_academic_subplans'))
 merged_df = merged_df.merge(external_degrees_df,on='ID',how='left',suffixes=('', '_external'))
 merged_df = merged_df.merge(hood_colors_df,left_on=['PROGRAM', 'DEGREE'],right_on=['PROGRAM', 'DEGREE'],how='left',suffixes=('', '_hood_colors'))
@@ -33,7 +34,7 @@ filtered_df['COMM_HONORS'] = filtered_df['UMS NUMBER'].apply(lambda x: 'Commonwe
 filtered_df['CSO'] = ""
 # Select and order columns 
 
-final_columns = ["SUB PLAN DIPLOMA DESCR","UKEY","ID","GRAD_UNIQUE_ID","PLAN TYPE","PLAN SEQUENCE","SUB PLAN DESCR","SUBPLAN TYPE",
+final_columns = ["SUB PLAN DIPLOMA DESCR","ID","GRAD_UNIQUE_ID","PLAN TYPE","PLAN SEQUENCE","SUB PLAN DESCR","SUBPLAN TYPE",
 "FERPA","DECEASED_FLG","DIPLOMA_NAME","DEGREE","BBSO","NAME","FIRST NAME","MIDDLE NAME","LAST NAME","College","ADDRESS1",
 "ADDRESS2","CITY","STATE","ZIP","COUNTRY","COUNTRY DESCR","PERS_EMAIL","UML_EMAIL","PERS_PHONE","CAREER","PROGRAM",
 "PROGRAM DESCR","PLAN","PLAN DESCR","DIPLOMA PLAN DESCR","SUB PLAN","CHECKOUT STATUS","CHECKOUT STATUS DESCR",
